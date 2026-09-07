@@ -64,7 +64,7 @@ export function Header() {
           <div className="flex items-center gap-3">
             <Magnetic className="hidden sm:block">
               <a
-                href="#visit"
+                href="#book"
                 className="inline-flex items-center gap-2 rounded-full border border-ember-300/40 bg-ember-300/5 px-5 py-2.5 label-tech text-ember-200 transition-colors duration-300 hover:border-ember-300 hover:bg-ember-300 hover:text-roast-950"
               >
                 Reserve

@@ -5,6 +5,7 @@ import { Menu } from "@/components/home/Menu";
 import { Spotlight } from "@/components/home/Spotlight";
 import { Room } from "@/components/home/Room";
 import { Visit } from "@/components/home/Visit";
+import { Reserve } from "@/components/home/Reserve";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Spotlight />
       <Room />
       <Visit />
+      <Reserve />
     </>
   );
 }

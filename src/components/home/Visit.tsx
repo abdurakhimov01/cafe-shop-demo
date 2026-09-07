@@ -51,7 +51,7 @@ export function Visit() {
               <div className="flex flex-wrap items-center gap-4">
                 <Magnetic>
                   <a
-                    href={`tel:${site.phone.replace(/\s/g, "")}`}
+                    href="#book"
                     className="group inline-flex items-center gap-3 rounded-full bg-cream-50 px-6 py-3.5 label-tech whitespace-nowrap text-roast-950 transition-colors duration-300 hover:bg-ember-300 sm:px-7 sm:py-4"
                   >
                     Book a table
@@ -61,10 +61,10 @@ export function Visit() {
                   </a>
                 </Magnetic>
                 <a
-                  href={`mailto:${site.email}`}
+                  href={`tel:${site.phone.replace(/\s/g, "")}`}
                   className="label-tech text-cream-300 underline-offset-8 transition-colors hover:text-cream-50 hover:underline"
                 >
-                  {site.email}
+                  {site.phone}
                 </a>
               </div>
             </Reveal>

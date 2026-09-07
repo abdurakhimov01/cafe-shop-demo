@@ -15,10 +15,15 @@ import { Reveal } from "@/components/ui/Reveal";
 import { img, room } from "@/lib/content";
 
 /**
- * Vertical travel per column, in percent of column height. The sign flips
- * across the section's scroll range, so a column starting low ends high.
+ * Vertical travel per column, in pixels. Fixed rather than a percentage of
+ * the column: a percentage of a 1600px column is hundreds of pixels, and the
+ * columns climbed over the heading above them.
+ *
+ * `OVERHANG` must be at least the largest drift — each column is that much
+ * taller than the window it scrolls inside, so drifting never uncovers a gap.
  */
-const DRIFT = [-18, 7, -11];
+const DRIFT = [-70, 30, -50];
+const OVERHANG = 70;
 
 export function Room() {
   const ref = useRef<HTMLDivElement>(null);
@@ -48,20 +53,20 @@ export function Room() {
       </div>
 
       {/* Three columns drifting at different speeds — the middle one runs
-          against the other two, which is what sells the depth. */}
-      <div
-        ref={ref}
-        className="mt-20 grid grid-cols-2 gap-3 px-3 md:grid-cols-3 md:gap-5 md:px-5"
-      >
-        {room.columns.map((column, i) => (
-          <Column
-            key={i}
-            images={column}
-            progress={scrollYProgress}
-            drift={DRIFT[i]}
-            className={i === 2 ? "hidden md:grid" : ""}
-          />
-        ))}
+          against the other two, which is what sells the depth. The wrapper
+          clips them so the drift stays inside the gallery. */}
+      <div ref={ref} className="mt-20 overflow-hidden">
+        <div className="grid grid-cols-2 gap-3 px-3 md:grid-cols-3 md:gap-5 md:px-5">
+          {room.columns.map((column, i) => (
+            <Column
+              key={i}
+              images={column}
+              progress={scrollYProgress}
+              drift={DRIFT[i]}
+              className={i === 2 ? "hidden md:grid" : ""}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -79,11 +84,17 @@ function Column({
   className?: string;
 }) {
   const reduce = useReducedMotion();
-  const y = useTransform(progress, [0, 1], [`${drift}%`, `${-drift}%`]);
+  const y = useTransform(progress, [0, 1], [drift, -drift]);
 
   return (
     <motion.div
-      style={reduce ? undefined : { y }}
+      style={{
+        // Taller than the clipping window at both ends, so the drift slides
+        // the column without ever revealing the edge of it.
+        marginBlock: -OVERHANG,
+        paddingBlock: OVERHANG,
+        ...(reduce ? {} : { y }),
+      }}
       className={`grid gap-3 md:gap-5 ${className ?? ""}`}
     >
       {images.map((id) => (

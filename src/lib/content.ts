@@ -163,6 +163,14 @@ export const room = {
   ],
 } as const;
 
+export const booking = {
+  label: "07 — Reserve",
+  heading: "Book the table, not the whole evening.",
+  body:
+    "Ninety minutes a sitting, up to six at one table. We hold every booking for fifteen minutes past the hour — after that the table goes back on the floor.",
+  fine: "No card, no deposit. Call us if your plans change and the table goes to someone else.",
+} as const;
+
 export const visit = {
   label: "06 — Visit",
   heading: "Come in. The first one is always the best one.",

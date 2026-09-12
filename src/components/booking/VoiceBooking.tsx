@@ -64,6 +64,9 @@ interface Message {
   text: string;
 }
 
+/** The largest table seats six — matches BookingForm's PARTY_SIZES. */
+const MAX_PARTY_SIZE = 6;
+
 const EMPTY_FIELDS: Fields = {
   partySize: null,
   date: null,
@@ -237,6 +240,13 @@ export function VoiceBooking() {
       const n = parsePartySize(text);
       if (n === null) {
         say("Sorry, how many people — just a number is fine.", true);
+        return;
+      }
+      if (n > MAX_PARTY_SIZE) {
+        say(
+          `Our biggest table seats ${MAX_PARTY_SIZE} — for a bigger group, please call us and we'll join tables. How many for this booking?`,
+          true,
+        );
         return;
       }
       const next = { ...fields, partySize: n };

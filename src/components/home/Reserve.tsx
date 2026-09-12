@@ -1,7 +1,7 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { MaskText } from "@/components/ui/MaskText";
 import { Reveal } from "@/components/ui/Reveal";
-import { BookingForm } from "@/components/booking/BookingForm";
+import { BookingPanel } from "@/components/booking/BookingPanel";
 import { booking } from "@/lib/content";
 
 export function Reserve() {
@@ -34,7 +34,7 @@ export function Reserve() {
             day strip widen the column instead of scrolling inside it. */}
         <Reveal delay={0.1} className="min-w-0 md:col-span-6 md:col-start-7">
           <div className="rounded-sm border border-cream-100/10 bg-roast-900/60 p-6 grain md:p-10">
-            <BookingForm />
+            <BookingPanel />
           </div>
         </Reveal>
       </div>
